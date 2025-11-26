@@ -11,22 +11,10 @@ import {
 /**
  * Initializes the Telegram Mini App SDK.
  */
-export async function init(options: {
-  debug: boolean;
-  eruda: boolean;
-}): Promise<void> {
-  setDebug(options.debug);
+export async function init(debug: boolean): Promise<void> {
+  setDebug(debug);
   initSDK();
 
-  // Add Eruda mobile console if needed
-  if (options.eruda) {
-    import('eruda').then(({ default: eruda }) => {
-      eruda.init();
-      eruda.position({ x: window.innerWidth - 50, y: 0 });
-    });
-  }
-
-  // Mount SDK components
   backButton.mount.ifAvailable();
   initData.restore();
 

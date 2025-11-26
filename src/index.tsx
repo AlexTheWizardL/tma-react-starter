@@ -15,14 +15,10 @@ const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 try {
   const launchParams = retrieveLaunchParams();
-  const { tgWebAppPlatform: platform } = launchParams;
   const debug = (launchParams.tgWebAppStartParam || '').includes('debug')
     || import.meta.env.DEV;
 
-  await init({
-    debug,
-    eruda: debug && ['ios', 'android'].includes(platform),
-  }).then(() => {
+  await init(debug).then(() => {
     root.render(
       <StrictMode>
         <Root />
