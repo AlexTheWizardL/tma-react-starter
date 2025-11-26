@@ -54,11 +54,15 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Configure Telegram Bot
-        if: ${{ secrets.BOT_TOKEN != '' }}
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           APP_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
+          if [ -z "$BOT_TOKEN" ]; then
+            echo "BOT_TOKEN not configured - skipping bot setup"
+            echo "Add BOT_TOKEN secret to enable automatic bot configuration"
+            exit 0
+          fi
           echo "Configuring bot menu button..."
           RESPONSE=$(curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/setChatMenuButton" \
             -H "Content-Type: application/json" \
