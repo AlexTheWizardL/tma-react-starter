@@ -47,15 +47,13 @@ The GitHub Action will automatically build and deploy your app.
 
 ### 5. Connect Bot to App
 
-After first deploy, configure your bot:
+After first deploy, configure your bot (one-time):
 
 ```bash
 cp .env.example .env
 # Edit .env: add BOT_TOKEN and APP_URL (your GitHub Pages URL)
 ./scripts/setup-bot.sh
 ```
-
-Or add `BOT_TOKEN` as a GitHub Secret for automatic bot configuration on every deploy.
 
 ## Environment Variables
 
