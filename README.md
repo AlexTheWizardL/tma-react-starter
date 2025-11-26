@@ -20,9 +20,11 @@ cd tma-react-starter
 npm install
 ```
 
-Update `vite.config.ts` - change the base path to your repo name:
+Update `vite.config.ts` with your repo name:
 ```ts
-base: command === 'serve' ? '/' : '/your-repo-name/',
+// Example: github.com/AlexTheWizardL/tma-react-starter
+// → base path: '/tma-react-starter/'
+base: command === 'serve' ? '/' : '/tma-react-starter/',
 ```
 
 ### 3. Local Development
