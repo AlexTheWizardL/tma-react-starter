@@ -29,5 +29,6 @@ export default defineConfig(({ command }) => ({
   publicDir: './public',
   server: {
     host: true,
+    allowedHosts: true,
   },
 }));
