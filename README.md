@@ -1,8 +1,8 @@
-# Telegram Mini App - React Starter
+# TMA React Starter
 
-Minimal starter for Telegram Mini Apps with React + TypeScript.
+Starter template for Telegram Mini Apps with React + TypeScript.
 
-**Stack:** React 18 · TypeScript · Vite · [@tma.js/sdk-react](https://docs.telegram-mini-apps.com/) · [Telegram UI](https://github.com/Telegram-Mini-Apps/TelegramUI)
+**Stack:** React 18 · TypeScript · Vite · Zustand · [@tma.js/sdk-react](https://docs.telegram-mini-apps.com/) · [Telegram UI](https://github.com/Telegram-Mini-Apps/TelegramUI)
 
 ## Quick Start
 
@@ -13,14 +13,23 @@ npm run dev
 
 Open http://localhost:5173/ — the app runs with a mock Telegram environment.
 
+## Development with ngrok
+
+Test on a real device with auto bot URL updates:
+
+```bash
+brew install ngrok
+ngrok config add-authtoken YOUR_TOKEN  # from ngrok.com/dashboard
+npm run dev:tunnel
+```
+
 ## Deploy to GitHub Pages
 
 **1. Configure base path**
 
 Edit `vite.config.ts` with your repo name:
 ```ts
-// github.com/YourUsername/your-repo → '/your-repo/'
-base: command === 'serve' ? '/' : '/tma-react-starter/',
+base: command === 'serve' ? '/' : '/your-repo/',
 ```
 
 **2. Enable GitHub Pages**
@@ -29,81 +38,51 @@ Go to repo **Settings → Pages → Source: GitHub Actions**
 
 **3. Push to main**
 
-The GitHub Action builds and deploys automatically on every push.
+The GitHub Action builds and deploys automatically.
 
 ## Connect to Telegram
 
-**1. Create a bot**
-
-Open [@BotFather](https://t.me/BotFather) and send `/newbot`. Save the token.
+**1. Create a bot** — [@BotFather](https://t.me/BotFather) → `/newbot`
 
 **2. Configure environment**
 
 ```bash
-cp .env.example .env
+cp .env.example .env.production
+# Edit: BOT_TOKEN, VITE_APP_URL
 ```
 
-Edit `.env`:
-```
-BOT_TOKEN=your_token_from_botfather
-APP_URL=https://yourusername.github.io/your-repo/
-```
-
-**3. Run setup script**
+**3. Run setup**
 
 ```bash
 ./scripts/setup-bot.sh
 ```
-
-**4. Test it**
-
-Open your bot in Telegram — click the menu button to launch the app!
-
-## SDK Features
-
-| Feature | Description |
-|---------|-------------|
-| `initData` | User info (name, username, photo, premium status) |
-| `themeParams` | Auto dark/light theme from Telegram |
-| `hapticFeedback` | Vibration feedback |
-| `backButton` | Native back navigation |
-| `mainButton` | Bottom action button |
-| `popup` | Native alert dialogs |
-| `cloudStorage` | Persist data across sessions |
 
 ## Project Structure
 
 ```
 src/
 ├── components/
-│   ├── App.tsx           # Router + theme setup
-│   ├── Page.tsx          # Page wrapper with back button
-│   ├── Root.tsx          # Error boundary wrapper
-│   └── EnvUnsupported.tsx
+│   ├── App.tsx           # Router + theme
+│   ├── TabBar/           # Tab navigation
+│   ├── Page.tsx          # Back button wrapper
+│   └── ErrorBoundary.tsx
+├── hooks/
+│   ├── useHaptics.ts     # Haptic feedback
+│   └── useBiometricAuth.ts # Biometric auth
+├── store/                # Zustand + cloud storage
 ├── pages/
-│   └── IndexPage/        # Home page
 ├── navigation/
-│   └── routes.tsx        # Route definitions
-├── init.ts               # SDK initialization
-├── mockEnv.ts            # Mock for local development
-└── vite-env.d.ts         # TypeScript env types
+└── init.ts               # SDK initialization
 ```
 
 ## Environment Variables
 
-App variables use `VITE_` prefix and are embedded at build time:
-
 ```bash
-# .env
-VITE_API_URL=https://api.example.com
+cp .env.example .env.development  # for dev:tunnel
+cp .env.example .env.production   # for setup-bot.sh
 ```
 
-```ts
-// In code
-const url = import.meta.env.VITE_API_URL
-```
-
-For GitHub Actions, add secrets in **Settings → Secrets → Actions**.
+Variables with `VITE_` prefix are embedded at build time.
 
 ## Resources
 
