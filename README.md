@@ -112,13 +112,22 @@ Variables with `VITE_` prefix are embedded at build time.
 
 ## Deep Links
 
-Share links that open your app directly: `https://t.me/bot/app?startapp=param`
+Share links that open your app directly with parameters.
+
+**Setup in BotFather:**
+1. Open [@BotFather](https://t.me/BotFather) → `/mybots` → Select your bot
+2. **Bot Settings → Configure Mini App → Enable Mini App**
+3. Enter your app URL and a short name (e.g., `app`)
+
+**Link format:** `https://t.me/YOUR_BOT/app?startapp=hello_world`
 
 Use [`useStartParam`](src/hooks/useStartParam.ts) hook to access parameters.
 
 ## Menu Button
 
-Launch app directly from chat without commands — configure via [@BotFather](https://t.me/BotFather) → Bot Settings → Menu Button.
+Launch app directly from chat — configured automatically by `./scripts/setup-bot.sh`
+
+To configure manually: [@BotFather](https://t.me/BotFather) → Bot Settings → Menu Button.
 
 ## License
 
