@@ -87,7 +87,8 @@ src/
 │   └── ErrorBoundary.tsx
 ├── hooks/
 │   ├── useHaptics.ts     # Haptic feedback
-│   └── useBiometricAuth.ts # Biometric auth
+│   ├── useBiometricAuth.ts # Biometric auth
+│   └── useStartParam.ts  # Deep link parameters
 ├── store/                # Zustand + cloud storage
 ├── pages/
 ├── navigation/
@@ -108,6 +109,16 @@ Variables with `VITE_` prefix are embedded at build time.
 - [Telegram Mini Apps Docs](https://core.telegram.org/bots/webapps)
 - [TMA.js SDK Documentation](https://docs.telegram-mini-apps.com/)
 - [Telegram UI Components](https://github.com/Telegram-Mini-Apps/TelegramUI)
+
+## Deep Links
+
+Share links that open your app directly: `https://t.me/bot/app?startapp=param`
+
+Use [`useStartParam`](src/hooks/useStartParam.ts) hook to access parameters.
+
+## Menu Button
+
+Launch app directly from chat without commands — configure via [@BotFather](https://t.me/BotFather) → Bot Settings → Menu Button.
 
 ## License
 

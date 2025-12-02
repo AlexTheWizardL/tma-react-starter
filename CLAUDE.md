@@ -66,6 +66,18 @@ const {
 } = useBiometricAuth({ debug?: boolean });
 ```
 
+**useStartParam** - Deep link parameter parsing
+```ts
+const { raw, params, has, get } = useStartParam();
+
+// Deep link: https://t.me/bot/app?startapp=page__profile__id__42
+// raw = "page__profile__id__42"
+// params = { page: "profile", id: "42" }
+// get("page") = "profile"
+// has("id") = true
+```
+Parses `startapp` query parameter from deep links. Supports key-value pairs with `__` delimiter.
+
 ### Components (src/components/)
 - `App.tsx` - HashRouter setup, theme detection (isDark signal), platform detection (iOS/Android)
 - `Root.tsx` - Wraps app with SDKProvider and ErrorBoundary

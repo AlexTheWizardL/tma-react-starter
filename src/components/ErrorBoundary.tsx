@@ -6,6 +6,20 @@ import {
   type ReactNode,
 } from 'react';
 
+/**
+ * React error boundary that catches errors in child components.
+ *
+ * @example
+ * <ErrorBoundary fallback={<ErrorPage />}>
+ *   <App />
+ * </ErrorBoundary>
+ *
+ * @example
+ * // With error details
+ * <ErrorBoundary fallback={({ error }) => <div>{String(error)}</div>}>
+ *   <App />
+ * </ErrorBoundary>
+ */
 export interface ErrorBoundaryProps extends PropsWithChildren {
   fallback?: ReactNode | ComponentType<{ error: unknown }>;
 }

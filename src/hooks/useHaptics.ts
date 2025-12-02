@@ -3,7 +3,21 @@ import { useCallback } from "react";
 import { useAppStore } from "@/store";
 
 /**
- * Hook for triggering haptic feedback respecting user preferences
+ * Hook for triggering haptic feedback respecting user preferences.
+ *
+ * @example
+ * const { impact, notification, selection } = useHaptics();
+ *
+ * // Trigger on button press
+ * impact("medium");
+ *
+ * // Trigger on success/error
+ * notification("success");
+ *
+ * // Trigger on selection change
+ * selection();
+ *
+ * @returns Object with impact, notification, and selection functions
  */
 export function useHaptics() {
   const hapticsEnabled = useAppStore((s) => s.hapticsEnabled);
