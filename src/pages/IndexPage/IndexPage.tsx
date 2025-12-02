@@ -1,11 +1,24 @@
 import { Section, Cell, List, Avatar } from '@telegram-apps/telegram-ui';
-import type { FC } from 'react';
-import { initData, hapticFeedback } from '@tma.js/sdk-react';
+import { type FC, useEffect } from 'react';
+import { initData, hapticFeedback, popup } from '@tma.js/sdk-react';
 
 import { Page } from '@/components/Page.tsx';
+import { useStartParam } from '@/hooks';
 
 export const IndexPage: FC = () => {
   const user = initData.user();
+  const { raw: startParam } = useStartParam();
+
+  // Show popup with deep link parameter value
+  useEffect(() => {
+    if (startParam && popup.isSupported()) {
+      popup.show({
+        title: 'Deep Link Parameter',
+        message: `startapp: ${startParam}`,
+        buttons: [{ type: 'ok' }],
+      });
+    }
+  }, [startParam]);
 
   const handleTap = () => {
     if (hapticFeedback.impactOccurred.isAvailable()) {
